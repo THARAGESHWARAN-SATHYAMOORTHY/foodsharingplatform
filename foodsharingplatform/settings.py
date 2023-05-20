@@ -76,7 +76,7 @@ WSGI_APPLICATION = 'foodsharingplatform.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': '',
+        'NAME': 'MySQL Database',
         'USER': 'root',
         'PASSWORD': '12345',
         'HOST': 'Tharageshwaran',
