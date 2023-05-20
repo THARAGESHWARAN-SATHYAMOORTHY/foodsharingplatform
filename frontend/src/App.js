@@ -8,6 +8,11 @@ function App() {
   const [newUserEmail, setNewUserEmail] = useState('');
   const [newFoodItemName, setNewFoodItemName] = useState('');
   const [newFoodItemDescription, setNewFoodItemDescription] = useState('');
+  const [selectedUserId, setSelectedUserId] = useState('');
+  const [selectedFoodItemId, setSelectedFoodItemId] = useState('');
+  const [newDonationQuantity, setNewDonationQuantity] = useState('');
+  const [newDonationPickupAddress, setNewDonationPickupAddress] = useState('');
+  const [newDonationDeliveryAddress, setNewDonationDeliveryAddress] = useState('');
 
   useEffect(() => {
     fetch('/api/users/')
@@ -51,6 +56,8 @@ function App() {
       body: JSON.stringify({
         name: newFoodItemName,
         description: newFoodItemDescription,
+        nutritional_info: '', // Add any additional fields here
+        allergy_alerts: '', // Add any additional fields here
       }),
     })
       .then((response) => response.json())
@@ -61,23 +68,28 @@ function App() {
       });
   };
 
-  const createDonation = (userId, foodItemId, quantity, pickupAddress, deliveryAddress) => {
+  const createDonation = () => {
     fetch('/api/donations/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        donor: userId,
-        food_item: foodItemId,
-        quantity: quantity,
-        pickup_address: pickupAddress,
-        delivery_address: deliveryAddress,
+        donor: selectedUserId,
+        food_item: selectedFoodItemId,
+        quantity: newDonationQuantity,
+        pickup_address: newDonationPickupAddress,
+        delivery_address: newDonationDeliveryAddress,
       }),
     })
       .then((response) => response.json())
       .then((data) => {
         setDonations([...donations, data]);
+        setSelectedUserId('');
+        setSelectedFoodItemId('');
+        setNewDonationQuantity('');
+        setNewDonationPickupAddress('');
+        setNewDonationDeliveryAddress('');
       });
   };
 
@@ -214,19 +226,7 @@ function App() {
             value={newDonationDeliveryAddress}
             onChange={(e) => setNewDonationDeliveryAddress(e.target.value)}
           />
-          <button
-            onClick={() =>
-              createDonation(
-                selectedUserId,
-                selectedFoodItemId,
-                newDonationQuantity,
-                newDonationPickupAddress,
-                newDonationDeliveryAddress
-              )
-            }
-          >
-            Create Donation
-          </button>
+          <button onClick={createDonation}>Create Donation</button>
         </div>
       </div>
     </div>

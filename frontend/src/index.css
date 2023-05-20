@@ -31,7 +31,10 @@ body {
   margin-bottom: 5px;
 }
 
-.section input,
+.section input {
+  margin-right: 10px;
+}
+
 .section select {
   margin-right: 10px;
 }
