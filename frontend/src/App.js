@@ -19,38 +19,65 @@ function App() {
       .then((data) => setDonations(data));
   }, []);
 
+  const createUser = () => {
+    // Implement logic to create a user
+  };
+
+  const createFoodItem = () => {
+    // Implement logic to create a food item
+  };
+
+  const createDonation = () => {
+    // Implement logic to create a donation
+  };
+
+  const completeDonation = (donationId) => {
+    // Implement logic to mark a donation as completed
+  };
+
+  const deleteDonation = (donationId) => {
+    // Implement logic to delete a donation
+  };
+
   return (
     <div>
       <h1 className="header">Food Sharing Platform</h1>
       <div className="section">
         <h2>Users</h2>
         <ul>
-          {users.map((user, index) => (
+          {users.map((user) => (
             <li key={user.id}>
-              {index + 1}. {user.name} - {user.email}
+              {user.name} - {user.email}
             </li>
           ))}
         </ul>
+        <button onClick={createUser}>Create User</button>
       </div>
       <div className="section">
         <h2>Food Items</h2>
         <ul>
-          {foodItems.map((foodItem, index) => (
+          {foodItems.map((foodItem) => (
             <li key={foodItem.id}>
-              {index + 1}. {foodItem.name} - {foodItem.description}
+              {foodItem.name} - {foodItem.description}
             </li>
           ))}
         </ul>
+        <button onClick={createFoodItem}>Create Food Item</button>
       </div>
       <div className="section">
         <h2>Donations</h2>
         <ul>
-          {donations.map((donation, index) => (
+          {donations.map((donation) => (
             <li key={donation.id}>
-              {index + 1}. {donation.donor.name} donated {donation.quantity} {donation.food_item.name}
+              {donation.donor.name} donated {donation.quantity} {donation.food_item.name}
+              {!donation.is_completed && (
+                <button onClick={() => completeDonation(donation.id)}>Complete</button>
+              )}
+              <button onClick={() => deleteDonation(donation.id)}>Delete</button>
             </li>
           ))}
         </ul>
+        <button onClick={createDonation}>Create Donation</button>
       </div>
     </div>
   );
