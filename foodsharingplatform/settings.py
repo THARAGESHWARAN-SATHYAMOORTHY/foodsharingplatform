@@ -54,6 +54,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CORS_ALLOWED_ORIGINS = [
+    'https://*',
+]
+
 ROOT_URLCONF = 'foodsharingplatform.urls'
 
 TEMPLATES = [
